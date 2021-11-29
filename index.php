@@ -70,6 +70,17 @@
         }
     }
 
+    if (isset($_POST['reg_delete'])) {
+        $get_id = $_SESSION['store_id'];
+        if ($get_id =="") {
+            echo"<script>alert('Information doesnt exist in the database')</script>";
+        }
+        else {
+            $sql_delete = "DELETE FROM registration_form WHERE id = '$get_id'";
+            $result_delete = mysqli_query($link,$sql_delete);
+            printf("Errormessage %s/n",mysqli_error($link));
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -116,8 +127,9 @@
                 <option value="Others">Others</option>
             </select>
             <br>
-            <input type="submit" value="UPDATE" name="update_info" class="btn mt-3 btn-danger">
-            <input type="submit" class="btn btn-success" value="REGISTER" name="reg_submit" style=" border-radius: 10px; cursor: pointer; margin-left: 25px; margin-top: 15px;">
+            <input type="submit" value="UPDATE" name="update_info" class="btn btn-info">
+            <input type="submit" class="btn btn-success mx-4 " value="REGISTER" name="reg_submit">
+            <input type="submit" value="DELETE" name="reg_delete" class="btn btn-danger">
         </form>
     </center>
 
