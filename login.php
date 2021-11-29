@@ -1,3 +1,10 @@
+<?php
+    if (isset($_POST['sign_in'])) {
+        $user = $_POST['user'];
+        $pass = $_POST['pass'];
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +19,16 @@
 </head>
 <body>
     
+    <form action="login.php"  style="background-color:lightgreen;" class="mx-auto shadow form-controls col-6 mt-5 py-4 px-3 border" name="login">
+        <h3 class="text-center">LOGIN HERE</h3>
+        <label for="username" class="form-label">USERNAME:</label>
+        <input type="text" name="user" class="form-control" required maxlength="20">
+        <br>
+        <label for="password" class="form-label">PASSWORD:</label>
+        <input type="password" name="pass" class="form-control" required maxlength="20">
+        <br>
+        <input type="submit" value="LOGIN" name="sign_in" class="btn btn-success">
+    </form>
 
     <script src="plugins/bootstrap/assets/js/vendor/jquery-slim.min.js"></script>
     <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
