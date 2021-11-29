@@ -83,6 +83,8 @@
 
             if ($result_delete == true) {
                 echo "<script>alert('$reg_name has been deleted successfully')</script>";
+
+                $_SESSION['store_id'] = "";
             }
         }
     }
