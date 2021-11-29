@@ -69,9 +69,10 @@
             echo"<script>alert('An Error Occured During Update')</script>";
         }
     }
-
+    //to delete
     if (isset($_POST['reg_delete'])) {
         $get_id = $_SESSION['store_id'];
+        $reg_name = $_POST['reg_name'];
         if ($get_id =="") {
             echo"<script>alert('Information doesnt exist in the database')</script>";
         }
@@ -79,6 +80,10 @@
             $sql_delete = "DELETE FROM registration_form WHERE id = '$get_id'";
             $result_delete = mysqli_query($link,$sql_delete);
             printf("Errormessage %s/n",mysqli_error($link));
+
+            if ($result_delete == true) {
+                echo "<script>alert('$reg_name has been deleted successfully')</script>";
+            }
         }
     }
 ?>
