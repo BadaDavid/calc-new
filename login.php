@@ -16,7 +16,7 @@
             echo "<script>alert('Incorrect Login Citerail')</script>";
             }
             else {
-                header("location: index.php");
+                header("location: indexphp");
             }
     
     }
