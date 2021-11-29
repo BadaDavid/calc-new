@@ -8,6 +8,8 @@
         $reg_email = $_POST['reg_email'];
         $reg_date = $_POST['reg_date'];
         $reg_gender = $_POST['reg_gender'];
+        $user = $_POST['user'];
+        $pass = $_POST['pass'];
 
         $sql_select = "SELECT * FROM registration_form WHERE name = '$reg_name'";
         $result_select = mysqli_query($link,$sql_select);
@@ -18,7 +20,7 @@
             echo"<script>alert('$reg_name already exists')</script>";
         }
         else {
-            $sql_insert = "INSERT INTO registration_form (name,address,email,dob,gender) VALUES ('$reg_name', '$reg_address', '$reg_email','$reg_date','$reg_gender')";
+            $sql_insert = "INSERT INTO registration_form (name,address,email,dob,gender,username,password) VALUES ('$reg_name', '$reg_address', '$reg_email','$reg_date','$reg_gender','$user','$pass')";
             $insert = mysqli_query($link,$sql_insert);
             printf("Errormessage: %s/n", mysqli_error($link));
             if ($insert == true) {
@@ -31,7 +33,7 @@
     }
 
     //To Search
-    $fetched_name = $fetched_address = $fetched_email = $fetched_date = $fetched_gender ="";
+    $fetched_name = $fetched_address = $fetched_email = $fetched_date = $fetched_gender = $fetch_user =  $fetch_pass="";
     if (isset($_POST['submit_search'])) {
         $search = $_POST['search'];
         $sql_search = "SELECT * FROM registration_form WHERE name = '$search'";
@@ -43,6 +45,8 @@
             $fetched_email = $row['email'];
             $fetched_date = $row['dob'];
             $fetched_gender = $row['gender'];
+            $fetched_user = $row['username'];
+            $fetched_pass = $row['password'];
         }
         $_SESSION['store_id'] = $fetched_id;
         if ($fetched_name =="") {
@@ -58,8 +62,10 @@
         $reg_email = $_POST['reg_email'];
         $reg_date = $_POST['reg_date'];
         $reg_gender = $_POST['reg_gender'];
+        $user = $_POST['user'];
+        $pass = $_POST['pass'];
 
-        $sql_update = "UPDATE registration_form SET name = '$reg_name', address = '$reg_address', email = '$reg_email', dob = '$reg_date', gender = '$reg_gender' WHERE id = '$get_id'";
+        $sql_update = "UPDATE registration_form SET name = '$reg_name', address = '$reg_address', email = '$reg_email', dob = '$reg_date', gender = '$reg_gender', username ='$user', password='$pass' WHERE id = '$get_id'";
         $result_update = mysqli_query($link, $sql_update);
         printf("Errormessage: %s/n", mysqli_error($link));
         if ($result_update == true) {
@@ -134,6 +140,11 @@
                 <option value="Others">Others</option>
             </select>
             <br>
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" name="user" value="<?php echo $fetch_user;?>" placeholder="Enter Username" class="form-control" maxlength="20" required >
+            <br>
+            <label for="password" class="form-label">Password</label>
+            <input type="text" class="form-control mb-3" placeholder="Choose Password" maxlength="20" name="pass" required value="<?php echo $fetch_pass;?>">
             <input type="submit" value="UPDATE" name="update_info" class="btn btn-info">
             <input type="submit" class="btn btn-success mx-4 " value="REGISTER" name="reg_submit">
             <input type="submit" value="DELETE" name="reg_delete" class="btn btn-danger">
